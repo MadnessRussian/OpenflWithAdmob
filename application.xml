@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+	<!-- NMML reference: https://gist.github.com/1763850 -->
+	
+
+	<include path="extensions/admob"/>
+	<java path="android-template/libs/google-play-services.jar" if="android" />
+	<template path="android-template/AndroidManifest.xml" rename="AndroidManifest.xml" if="android" />
+	<template path="android-template/src/org/haxe/lime/GameActivity.java" rename="src/org/haxe/lime/GameActivity.java" if="android" />
+
+
+
+	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
+	<meta title="TestProject" package="test.TestProject" version="1.0.0" company="Madness" />
+	
+	<!-- output -->
+	<app main="test.Main" file="TestProject" path="bin" />
+	
+	<window background="#0772a1" fps="60" antialiasing="0" />
+	<window width="480" height="800" unless="mobile" />
+	
+	<!--Desktop-specific-->
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" />
+	
+	<!--Mobile-specific-->
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" />
+		
+	<!-- classpath, haxe libs -->
+	<source path="src" />
+	<haxelib name="openfl" />
+	<haxelib name="actuate" />
+	<haxelib name="flixel"/>
+	
+	
+	<!-- assets -->
+	<set name="BUILD_DIR" value="export" />
+	<icon path="assets/openfl.svg" />
+	<assets path="assets/img" rename="img" include="*.png"/>
+	
+	
+	
+	<section if="release-sign">
+		<certificate path="path/to/android.keystore" if="android" />
+		<certificate path="path/to/author.p12" if="blackberry" />
+	</section>
+	
+	<android target-sdk-version="15"  />
+	<android install-location="preferExternal" />
+	
+</project>
